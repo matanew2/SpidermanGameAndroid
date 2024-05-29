@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.spidermangame.MainActivity">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/road_IMG_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@drawable/bg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+<!--        heart and score part -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/game_IMG_heart1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_heart"
+                    android:scaleType="fitCenter"/>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/game_IMG_heart2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    app:srcCompat="@drawable/ic_heart"
+                    android:scaleType="fitCenter"/>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/game_IMG_heart3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    app:srcCompat="@drawable/ic_heart"
+                    android:scaleType="fitCenter"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/main_TXT_Score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/score"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="20dp"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/main_TXT_addScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/init_score"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"/>
+        </LinearLayout>
+
+<!--        hero and villian part-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:orientation="vertical">
+
+<!--        villain part -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                tools:ignore="NestedWeights">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/main_IMG_villian1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_villian"/>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/main_IMG_villian2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_villian"/>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/main_IMG_villian3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_villian"/>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/main_IMG_villian4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_villian"/>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/main_IMG_villian5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_villian"/>
+
+            </LinearLayout>
+<!--        villian part -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"
+                        tools:ignore="NestedWeights" />
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"/>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian8"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"/>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian9"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"/>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+<!--        villian part -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian11"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"
+                        tools:ignore="NestedWeights" />
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian12"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"/>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian13"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"/>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian14"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"/>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian15"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"/>
+                </LinearLayout>
+
+            </LinearLayout>
+<!--        villian part -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian16"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"
+                        tools:ignore="NestedWeights" />
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian17"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"/>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian18"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"/>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian19"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"/>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_villian20"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_villian"/>
+                </LinearLayout>
+
+            </LinearLayout>
+<!--        villain part -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/main_IMG_villian21"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_villian"/>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/main_IMG_villian22"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_villian"/>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/main_IMG_villian23"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_villian"/>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/main_IMG_villian24"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_villian"/>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/main_IMG_villian25"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_villian"/>
+
+            </LinearLayout>
+<!--            hero part-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_leftHero"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_hero"
+                        tools:ignore="NestedWeights" />
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_leftMidHero"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_hero"/>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_middleHero"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_hero"/>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_rightMidHero"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_hero"/>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/main_IMG_rightHero"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_hero"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+<!--        navigation bar-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/main_BTN_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="20dp"
+                app:icon="@drawable/ic_left"
+                android:text="@string/left"/>
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/main_BTN_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_right"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/right"
+                tools:ignore="RelativeOverlap" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
