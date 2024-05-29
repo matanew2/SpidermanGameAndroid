@@ -71,8 +71,7 @@ public class GameManager {
     }
 
     public int randomViewImage() {
-        int num =  rand.nextInt(VILLAIN_COLS-2); // 0-4
-        return num;
+        return rand.nextInt(VILLAIN_COLS-2);
     }
 
     public int randTypeImage() {
