@@ -9,7 +9,6 @@ import com.example.spidermanvsvenomgame.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.Arrays;
-import java.util.Timer;
 
 public class GameViewManager {
 
@@ -72,6 +71,9 @@ public class GameViewManager {
         if (type == 0) {
             game_IMG_villains[row][col].setImageResource(R.drawable.ic_villian);
             gameManager.setMainTypeMatrix(row, col, 0);
+        } else if (type == 1) {
+            game_IMG_villains[row][col].setImageResource(R.drawable.ic_heart);
+            gameManager.setMainTypeMatrix(row, col, 1);
         }
     }
 
@@ -93,6 +95,15 @@ public class GameViewManager {
         if (mainType == 0) { // Main type 0 indicates villain
             gameManager.decreaseHealth();
             game_IMG_hearts[gameManager.getHealth()].setVisibility(View.INVISIBLE);
+            gameManager.setMainTypeMatrix(row, col, -1);
+        }
+        if (mainType == 1) { // Main type 1 indicates heart
+            if (gameManager.getHealth() == 3) {
+                return;
+            }
+            gameManager.increaseHealth();
+            System.out.println(gameManager.getHealth());
+            game_IMG_hearts[gameManager.getHealth() - 1].setVisibility(View.VISIBLE);
             gameManager.setMainTypeMatrix(row, col, -1);
         }
     }
