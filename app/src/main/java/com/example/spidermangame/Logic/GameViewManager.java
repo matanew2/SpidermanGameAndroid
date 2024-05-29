@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.example.spidermanvsvenomgame.R;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.textview.MaterialTextView;
 
 import java.util.Arrays;
 
@@ -15,13 +16,15 @@ public class GameViewManager {
     private final ShapeableImageView[] game_IMG_hearts;
     public final ShapeableImageView[][] game_IMG_villains;
     private final ShapeableImageView[] game_IMG_hero;
+    private MaterialTextView game_TXT_score;
     private final GameManager gameManager;
 
-    public GameViewManager(ShapeableImageView[] game_IMG_hearts, ShapeableImageView[][] game_IMG_villains, ShapeableImageView[] game_IMG_hero, GameManager gameManager) {
+    public GameViewManager(ShapeableImageView[] game_IMG_hearts, ShapeableImageView[][] game_IMG_villains, ShapeableImageView[] game_IMG_hero, GameManager gameManager, MaterialTextView game_TXT_score) {
         this.game_IMG_hearts = game_IMG_hearts;
         this.game_IMG_villains = game_IMG_villains;
         this.game_IMG_hero = game_IMG_hero;
         this.gameManager = gameManager;
+        this.game_TXT_score = game_TXT_score;
     }
 
     public void showHearts() {
@@ -74,6 +77,9 @@ public class GameViewManager {
         } else if (type == 1) {
             game_IMG_villains[row][col].setImageResource(R.drawable.ic_heart);
             gameManager.setMainTypeMatrix(row, col, 1);
+        } else if (type == 2) {
+            game_IMG_villains[row][col].setImageResource(R.drawable.ic_web_score);
+            gameManager.setMainTypeMatrix(row, col, 2);
         }
     }
 
@@ -104,6 +110,11 @@ public class GameViewManager {
             gameManager.increaseHealth();
             System.out.println(gameManager.getHealth());
             game_IMG_hearts[gameManager.getHealth() - 1].setVisibility(View.VISIBLE);
+            gameManager.setMainTypeMatrix(row, col, -1);
+        }
+        if (mainType == 2) { // Main type 2 indicates bullet
+            gameManager.addScore();
+            game_TXT_score.setText(String.valueOf(gameManager.getScore()));
             gameManager.setMainTypeMatrix(row, col, -1);
         }
     }

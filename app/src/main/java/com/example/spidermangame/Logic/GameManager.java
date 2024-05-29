@@ -3,8 +3,8 @@ package com.example.spidermangame.Logic;
 import java.util.Random;
 
 public class GameManager {
-    private int score = 0;
-    private int health = 0;
+    private int score;
+    private int health;
     public static final int VILLAIN_ROWS = 5;
     public static final int VILLAIN_COLS = 5;
     private static final int TOP_RIGHT = VILLAIN_COLS - 1;
@@ -14,6 +14,7 @@ public class GameManager {
 
     public GameManager(int health) {
         this.health = health;
+        this.score = 0;
         initMatrixType();
     }
 
@@ -21,9 +22,6 @@ public class GameManager {
         return health;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
 
     public void decreaseHealth() {
         health--;
@@ -73,14 +71,31 @@ public class GameManager {
     }
 
     public int randomViewImage() {
-        return rand.nextInt(VILLAIN_COLS); // 0-4
+        int num =  rand.nextInt(VILLAIN_COLS-2); // 0-4
+        return num;
     }
 
     public int randTypeImage() {
-        return rand.nextInt(5) > 3 ? 1 : 0;
+        // 0 - villain, 1 - heart, 2 - web score
+        int num = rand.nextInt(10);
+        if (num < 6) {
+            return 0;
+        } else if (num < 8) {
+            return 2;
+        } else {
+            return 1;
+        }
     }
 
     public void gameOver() {
         System.out.println("Game Over");
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

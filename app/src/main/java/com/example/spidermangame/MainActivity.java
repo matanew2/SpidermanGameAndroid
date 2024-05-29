@@ -9,6 +9,7 @@ import com.example.spidermangame.Logic.GameViewManager;
 import com.example.spidermanvsvenomgame.R;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.textview.MaterialTextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private GameManager gameManager;
     private GameViewManager gameViewManager;
     private GameTimer gameTimer;
+    private MaterialTextView game_TXT_score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         findViewObjects();
         gameManager = new GameManager(game_IMG_hearts.length);
-        gameViewManager = new GameViewManager(game_IMG_hearts, game_IMG_villains, game_IMG_hero, gameManager);
+        gameViewManager = new GameViewManager(game_IMG_hearts, game_IMG_villains, game_IMG_hero, gameManager, game_TXT_score);
         gameTimer = new GameTimer(gameManager, gameViewManager);
 
         initViews();
@@ -71,10 +73,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findViewObjects() {
+        findAddScore();
         findHearts();
         findVillains();
         findHero();
         findArrowsBar();
+    }
+
+    private void findAddScore() {
+        this.game_TXT_score = findViewById(R.id.main_TXT_addScore);
     }
 
     private void findHearts() {
