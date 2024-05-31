@@ -5,15 +5,16 @@ import java.util.Random;
 public class GameManager {
     private int score;
     private int health;
-    public static final int VILLAIN_ROWS = 5;
-    public static final int VILLAIN_COLS = 5;
-    private static final int TOP_RIGHT = VILLAIN_COLS - 1;
+    public int sizeMatrix;
     private final Random rand = new Random();
-    private int currentIndexHero = VILLAIN_COLS / 2;
     private int[][] mainTypeMatrix;
+    private int currentIndexHero;
 
-    public GameManager(int health) {
+
+    public GameManager(int health, int sizeMatrix) {
         this.health = health;
+        this.sizeMatrix = sizeMatrix;
+        this.currentIndexHero = sizeMatrix / 2;
         this.score = 0;
         initMatrixType();
     }
@@ -21,7 +22,6 @@ public class GameManager {
     public int getHealth() {
         return health;
     }
-
 
     public void decreaseHealth() {
         health--;
@@ -32,38 +32,21 @@ public class GameManager {
     }
 
     private void initMatrixType() {
-        mainTypeMatrix = new int[VILLAIN_ROWS][VILLAIN_COLS];
+        mainTypeMatrix = new int[sizeMatrix][sizeMatrix];
         for (int[] row : mainTypeMatrix) {
             java.util.Arrays.fill(row, -1);
         }
-    }
-
-    public int getMain_type_matrix(int row, int col) {
-        return mainTypeMatrix[row][col];
-    }
-
-    public int[][] getMatrix() {
-        return mainTypeMatrix;
     }
 
     public void addScore() {
         score += rand.nextInt(50) + 10;
     }
 
-    public void setMainTypeMatrix(int row, int col, int type) {
+    public void setTypeCellInMatrix(int row, int col, int type) {
         mainTypeMatrix[row][col] = type;
     }
-
-    public int getMainTypeMatrix(int row, int col) {
-        return mainTypeMatrix[row][col];
-    }
-
-    public int getCurrentIndexHero() {
-        return currentIndexHero;
-    }
-
     public void moveHero(int direction) {
-        if (direction == 1 && currentIndexHero < TOP_RIGHT) {
+        if (direction == 1 && currentIndexHero < sizeMatrix - 1){
             currentIndexHero++;
         } else if (direction == -1 && currentIndexHero > 0) {
             currentIndexHero--;
@@ -71,7 +54,7 @@ public class GameManager {
     }
 
     public int randomViewImage() {
-        return rand.nextInt(VILLAIN_COLS-2);
+        return rand.nextInt(sizeMatrix);
     }
 
     public int randTypeImage() {
@@ -90,11 +73,19 @@ public class GameManager {
         System.out.println("Game Over");
     }
 
-    public int getScore() {
-        return score;
+    public int getCurrentIndexHero() {
+        return currentIndexHero;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public int getSizeMatrix() {
+        return sizeMatrix;
+    }
+
+    public int getTypeCellInMatrix(int i, int j) {
+        return mainTypeMatrix[i][j];
+    }
+
+    public int getScore() {
+        return score;
     }
 }
