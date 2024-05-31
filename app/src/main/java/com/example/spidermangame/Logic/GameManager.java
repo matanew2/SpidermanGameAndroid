@@ -6,7 +6,6 @@ public class GameManager {
     private int score;
     private int health;
     private final int rowSize;
-
     private final int colSize;
     private final Random random;
     private final int[][] mainTypeMatrix;
@@ -95,7 +94,6 @@ public class GameManager {
     public int getTypeCellInMatrix(int i, int j) {
         return mainTypeMatrix[i][j];
     }
-
 
     public int getScore() {
         return score;
