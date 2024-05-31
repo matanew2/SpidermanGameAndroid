@@ -6,7 +6,9 @@ import java.util.Random;
 public class GameManager {
     private int score;
     private int health;
-    private final int sizeMatrix;
+    private final int rowSize;
+
+    private final int colSize;
     private final Random random;
     private final int[][] mainTypeMatrix;
     private int currentIndexHero;
@@ -16,13 +18,22 @@ public class GameManager {
     private static final int HEART_THRESHOLD = 8;
 
     public GameManager(int health, int sizeMatrix) {
-        this.sizeMatrix = sizeMatrix;
+        this.rowSize = sizeMatrix*2;
+        this.colSize = sizeMatrix;
         this.health = health;
-        this.currentIndexHero = sizeMatrix / 2;
+        this.currentIndexHero = colSize / 2;
         this.score = 0;
         this.random = new Random();
-        this.mainTypeMatrix = new int[sizeMatrix][sizeMatrix];
+        this.mainTypeMatrix = new int[rowSize][colSize];
         initMatrixType();
+    }
+
+    public int getRowSize() {
+        return rowSize;
+    }
+
+    public int getColSize() {
+        return colSize;
     }
 
     public int getHealth() {
@@ -52,7 +63,7 @@ public class GameManager {
     }
 
     public void moveHero(int direction) {
-        if (direction == 1 && currentIndexHero < sizeMatrix - 1) {
+        if (direction == 1 && currentIndexHero < colSize - 1) {
             currentIndexHero++;
         } else if (direction == -1 && currentIndexHero > 0) {
             currentIndexHero--;
@@ -60,7 +71,7 @@ public class GameManager {
     }
 
     public int randomViewImage() {
-        return random.nextInt(sizeMatrix);
+        return random.nextInt(colSize);
     }
 
     public int randTypeImage() {
@@ -82,13 +93,14 @@ public class GameManager {
         return currentIndexHero;
     }
 
-    public int getSizeMatrix() {
-        return sizeMatrix;
-    }
+//    public int getSizeMatrix() {
+//        return sizeMatrix;
+//    }
 
     public int getTypeCellInMatrix(int i, int j) {
         return mainTypeMatrix[i][j];
     }
+
 
     public int getScore() {
         return score;

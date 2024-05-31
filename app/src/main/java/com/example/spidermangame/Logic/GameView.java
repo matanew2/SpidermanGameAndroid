@@ -31,19 +31,19 @@ public class GameView {
     }
 
     public void updateHeroVisibility() {
-        int lastIndex = gameManager.getSizeMatrix() - 1;
-        for (int i = 0; i < gameManager.getSizeMatrix(); i++) {
-            gridLayout.getChildAt(lastIndex * gameManager.getSizeMatrix() + i).setVisibility(View.INVISIBLE);
+        int lastIndex = gameManager.getRowSize() - 1;
+        for (int i = 0; i < gameManager.getColSize(); i++) {
+            gridLayout.getChildAt(lastIndex * gameManager.getColSize() + i).setVisibility(View.INVISIBLE);
         }
         setImage(lastIndex, gameManager.getCurrentIndexHero(), 3);
-        gridLayout.getChildAt(lastIndex * gameManager.getSizeMatrix() + gameManager.getCurrentIndexHero()).setVisibility(View.VISIBLE);
+        gridLayout.getChildAt(lastIndex * gameManager.getColSize() + gameManager.getCurrentIndexHero()).setVisibility(View.VISIBLE);
     }
 
     public void updateViewObjects() {
-        int lastIndex = gameManager.getSizeMatrix() - 2;
+        int lastIndex = gameManager.getRowSize() - 2; //
         for (int i = lastIndex; i >= 0; i--) {
-            for (int j = gameManager.getSizeMatrix() - 1; j >= 0; j--) {
-                View childView = gridLayout.getChildAt(i * gameManager.getSizeMatrix() + j);
+            for (int j = gameManager.getColSize() - 1; j >= 0; j--) {
+                View childView = gridLayout.getChildAt(i * gameManager.getColSize() + j);
                 if (childView.getVisibility() == View.VISIBLE) {
                     childView.setVisibility(View.INVISIBLE);
                     if (i == lastIndex) {
@@ -53,14 +53,14 @@ public class GameView {
                     gameManager.setTypeCellInMatrix(i, j, -1);
                     setImage(i + 1, j, type);
                     gameManager.setTypeCellInMatrix(i + 1, j, type);
-                    gridLayout.getChildAt((i + 1) * gameManager.getSizeMatrix() + j).setVisibility(View.VISIBLE);
+                    gridLayout.getChildAt((i + 1) * gameManager.getColSize() + j).setVisibility(View.VISIBLE);
                 }
             }
         }
     }
 
     public void setImage(int row, int col, int type) {
-        ShapeableImageView imageView = (ShapeableImageView) gridLayout.getChildAt(row * gameManager.getSizeMatrix() + col);
+        ShapeableImageView imageView = (ShapeableImageView) gridLayout.getChildAt(row * gameManager.getColSize() + col);
         if (imageView != null) {
             int drawableResId;
             switch (type) {
@@ -87,10 +87,10 @@ public class GameView {
     }
 
     public void detectAndHandleCollision() {
-        int lastIndex = gameManager.getSizeMatrix() - 2;
+        int lastIndex = gameManager.getRowSize() - 2;
         for (int row = lastIndex; row >= 0; row--) {
-            for (int col = 0; col < gameManager.getSizeMatrix(); col++) {
-                ShapeableImageView imageView = (ShapeableImageView) gridLayout.getChildAt(row * gameManager.getSizeMatrix() + col);
+            for (int col = 0; col < gameManager.getColSize(); col++) {
+                ShapeableImageView imageView = (ShapeableImageView) gridLayout.getChildAt(row * gameManager.getColSize() + col);
                 if (row == lastIndex && imageView != null && imageView.getVisibility() == View.VISIBLE && col == gameManager.getCurrentIndexHero()) {
                     handleCollisionWithVillain(row, col);
                 }
@@ -127,11 +127,11 @@ public class GameView {
     }
 
     public void initMatrix() {
-        int sizeMatrix = gameManager.getSizeMatrix();
-        gridLayout.setColumnCount(sizeMatrix);
-        gridLayout.setRowCount(sizeMatrix);
-        for (int i = 0; i < sizeMatrix; i++) {
-            for (int j = 0; j < sizeMatrix; j++) {
+//        int sizeMatrix = gameManager.getRowSize();
+        gridLayout.setColumnCount( gameManager.getColSize());
+        gridLayout.setRowCount(gameManager.getRowSize());
+        for (int i = 0; i < gameManager.getRowSize(); i++) {
+            for (int j = 0; j < gameManager.getColSize(); j++) {
                 ShapeableImageView imageView = new ShapeableImageView(context);
                 GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                 params.width = GridLayout.LayoutParams.WRAP_CONTENT;
