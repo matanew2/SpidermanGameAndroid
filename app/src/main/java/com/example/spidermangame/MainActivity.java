@@ -23,18 +23,24 @@ public class MainActivity extends AppCompatActivity {
     private GameView gameView;
     private GameController gameController;
 
+    private static final int INITIAL_HEALTH = 3;
+    private static final int GRID_SIZE = 3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewObjects();
-        gameManager = new GameManager(3, 4);
-        gameView = new GameView(this, game_IMG_hearts, game_LAYOUT_matrix, game_TXT_score, gameManager);
-        gameController = new GameController(gameManager, gameView);
-
+        initializeGameComponents();
         initViews();
         initListeners();
+    }
+
+    private void initializeGameComponents() {
+        findViewObjects();
+        gameManager = new GameManager(INITIAL_HEALTH, GRID_SIZE);
+        gameView = new GameView(this, game_IMG_hearts, game_LAYOUT_matrix, game_TXT_score, gameManager);
+        gameController = new GameController(gameManager, gameView);
     }
 
     @Override
