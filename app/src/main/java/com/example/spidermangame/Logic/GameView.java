@@ -127,7 +127,6 @@ public class GameView {
     }
 
     public void initMatrix() {
-//        int sizeMatrix = gameManager.getRowSize();
         gridLayout.setColumnCount( gameManager.getColSize());
         gridLayout.setRowCount(gameManager.getRowSize());
         for (int i = 0; i < gameManager.getRowSize(); i++) {

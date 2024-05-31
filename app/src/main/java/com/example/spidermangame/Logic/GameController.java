@@ -11,12 +11,8 @@ public class GameController {
 
     private final GameManager gameManager;
     private final GameView gameView;
-    private Timer timer;
-    private int initialDelay = 1000; // Initial delay
+    private final Timer timer;
     private int time = 0;
-    private static final int DELAY_INCREMENT_INTERVAL = 20; // 20 seconds
-
-    private static final int REDUCE_DELAY = 50; // 50 milliseconds
 
     public GameController(GameManager gameManager, GameView gameView) {
         this.gameManager = gameManager;
@@ -25,16 +21,13 @@ public class GameController {
     }
 
     public void startGame() {
+        // Initial delay
+        int initialDelay = 1000;
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 runOnUiThread(() -> {
                     play();
-//                    if (time % DELAY_INCREMENT_INTERVAL == 0) {
-//                        if (initialDelay > 300)
-//                            updateDelay(initialDelay - REDUCE_DELAY);
-//                    }
-//                    System.out.println("Time: " + time+ " Delay: " + initialDelay);
                     if (time % 2 != 0) {
                         createRandomObj();
                     }
@@ -77,14 +70,4 @@ public class GameController {
         timer.cancel();
     }
 
-    private void updateDelay(int newDelay) {
-        initialDelay = newDelay;
-        restartTimer();
-    }
-
-    private void restartTimer() {
-        timer.cancel();
-        timer = new Timer();
-        startGame();
-    }
 }

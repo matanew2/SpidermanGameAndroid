@@ -1,6 +1,5 @@
 package com.example.spidermangame.Logic;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class GameManager {
@@ -92,10 +91,6 @@ public class GameManager {
     public int getCurrentIndexHero() {
         return currentIndexHero;
     }
-
-//    public int getSizeMatrix() {
-//        return sizeMatrix;
-//    }
 
     public int getTypeCellInMatrix(int i, int j) {
         return mainTypeMatrix[i][j];
