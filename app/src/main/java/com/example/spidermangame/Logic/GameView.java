@@ -2,11 +2,15 @@ package com.example.spidermangame.Logic;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Handler;
 import android.os.Vibrator;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import com.example.spidermanvsvenomgame.R;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -16,17 +20,15 @@ public class GameView {
     private final ShapeableImageView[] game_IMG_hearts;
     private final MaterialTextView game_TXT_score;
 
-    private final MaterialTextView game_TXT_toast;
     private final GridLayout gridLayout;
     private final GameManager gameManager;
     private final Context context;
 
-    public GameView(Context context, ShapeableImageView[] game_IMG_hearts, GridLayout game_LAYOUT_matrix, MaterialTextView game_TXT_score, MaterialTextView game_TXT_toast, GameManager gameManager) {
+    public GameView(Context context, ShapeableImageView[] game_IMG_hearts, GridLayout game_LAYOUT_matrix, MaterialTextView game_TXT_score, GameManager gameManager) {
         this.gameManager = gameManager;
         this.game_IMG_hearts = game_IMG_hearts;
         this.game_TXT_score = game_TXT_score;
         this.gridLayout = game_LAYOUT_matrix;
-        this.game_TXT_toast = game_TXT_toast;
         this.context = context;
     }
 
@@ -139,17 +141,28 @@ public class GameView {
 
     }
 
-    @SuppressLint("DefaultLocale")
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     private void toastMessageCrash() {
-        game_TXT_toast.setVisibility(View.VISIBLE);
-        game_TXT_toast.setText(String.format("Ouch! You lost a life! you have left %d lives", gameManager.getHealth()));
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        @SuppressLint("InflateParams") View layout = inflater.inflate(R.layout.toast_layout, null);
+        // Set the text for the custom Toast
+        MaterialTextView text = layout.findViewById(R.id.toast_text);
+        text.setText("Ouch! You've been hit! Health: " + gameManager.getHealth() + " lives left");
 
-        // Create a new Handler
-        Handler handler = new Handler(context.getMainLooper());
-
-        // Post a delayed task to hide the TextView after 3 seconds (3000 milliseconds)
-        handler.postDelayed(() -> game_TXT_toast.setVisibility(View.INVISIBLE), 3000);
+        // Create the Toast with the custom layout
+        Toast toast = getToast(layout);
+        toast.show();
     }
+
+    @NonNull
+    private Toast getToast(View layout) {
+        Toast toast = new Toast(context);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.setGravity(Gravity.CENTER, 0, 0);  // Adjust the gravity and offset as needed
+        return toast;
+    }
+
 
     public void initMatrix() {
         gridLayout.setColumnCount( gameManager.getColSize());

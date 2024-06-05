@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializeGameComponents() {
         findViewObjects();
         gameManager = new GameManager(INITIAL_HEALTH, GRID_SIZE);
-        gameView = new GameView(this, game_IMG_hearts, game_LAYOUT_matrix, game_TXT_score, game_TXT_toast, gameManager);
+        gameView = new GameView(this, game_IMG_hearts, game_LAYOUT_matrix, game_TXT_score, gameManager);
         gameController = new GameController(gameManager, gameView);
     }
 
@@ -81,15 +81,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findViewObjects() {
-        findToast();
         findAddScore();
         findHearts();
         findGrid();
         findArrowsBar();
-    }
-
-    private void findToast() {
-        game_TXT_toast = findViewById(R.id.main_TXT_toast);
     }
 
     private void findGrid() {

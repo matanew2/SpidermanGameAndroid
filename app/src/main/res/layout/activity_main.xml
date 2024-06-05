@@ -86,16 +86,6 @@
             android:layout_height="0dp"
             android:layout_weight="5"
             android:orientation="vertical">
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/main_TXT_toast"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:text="@string/nan"
-                android:visibility="invisible"
-                android:textColor="@color/white"
-                android:gravity="center" />
-
             <GridLayout
                 android:id="@+id/gridLayout"
                 android:layout_width="match_parent"
