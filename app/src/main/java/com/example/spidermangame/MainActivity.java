@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private ShapeableImageView[] game_IMG_hearts;
     private GridLayout game_LAYOUT_matrix;
     private MaterialTextView game_TXT_score;
+
+    private MaterialTextView game_TXT_toast;
     private ExtendedFloatingActionButton[] game_BTN_arrows; // init listeners
     private GameManager gameManager;
     private GameView gameView;
@@ -30,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initializeGameComponents();
         initViews();
         initListeners();
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializeGameComponents() {
         findViewObjects();
         gameManager = new GameManager(INITIAL_HEALTH, GRID_SIZE);
-        gameView = new GameView(this, game_IMG_hearts, game_LAYOUT_matrix, game_TXT_score, gameManager);
+        gameView = new GameView(this, game_IMG_hearts, game_LAYOUT_matrix, game_TXT_score, game_TXT_toast, gameManager);
         gameController = new GameController(gameManager, gameView);
     }
 
@@ -80,10 +81,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findViewObjects() {
+        findToast();
         findAddScore();
         findHearts();
         findGrid();
         findArrowsBar();
+    }
+
+    private void findToast() {
+        game_TXT_toast = findViewById(R.id.main_TXT_toast);
     }
 
     private void findGrid() {

@@ -53,13 +53,12 @@ public class GameController {
 
     private void checkHealthHero() {
         if (gameManager.getHealth() == 0) {
-            stopGame();
-            gameOver();
+            resetGame();
         }
     }
 
-    private void gameOver() {
-        runOnUiThread(gameView::gameOver);
+    private void resetGame() {
+        runOnUiThread(gameView::resetGame);
     }
 
     private void runOnUiThread(Runnable runnable) {

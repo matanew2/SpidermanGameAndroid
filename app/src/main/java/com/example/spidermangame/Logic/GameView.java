@@ -1,6 +1,9 @@
 package com.example.spidermangame.Logic;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Vibrator;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
@@ -12,15 +15,18 @@ import com.google.android.material.textview.MaterialTextView;
 public class GameView {
     private final ShapeableImageView[] game_IMG_hearts;
     private final MaterialTextView game_TXT_score;
+
+    private final MaterialTextView game_TXT_toast;
     private final GridLayout gridLayout;
     private final GameManager gameManager;
     private final Context context;
 
-    public GameView(Context context, ShapeableImageView[] game_IMG_hearts, GridLayout game_LAYOUT_matrix, MaterialTextView game_TXT_score, GameManager gameManager) {
+    public GameView(Context context, ShapeableImageView[] game_IMG_hearts, GridLayout game_LAYOUT_matrix, MaterialTextView game_TXT_score, MaterialTextView game_TXT_toast, GameManager gameManager) {
         this.gameManager = gameManager;
         this.game_IMG_hearts = game_IMG_hearts;
         this.game_TXT_score = game_TXT_score;
         this.gridLayout = game_LAYOUT_matrix;
+        this.game_TXT_toast = game_TXT_toast;
         this.context = context;
     }
 
@@ -104,6 +110,9 @@ public class GameView {
             case 0: // Villain
                 gameManager.decreaseHealth();
                 game_IMG_hearts[gameManager.getHealth()].setVisibility(View.INVISIBLE);
+                // Show the toast message and vibrate the device
+                vibrateAndToast();
+
                 break;
             case 1: // Heart
                 if (gameManager.getHealth() < game_IMG_hearts.length) {
@@ -121,9 +130,25 @@ public class GameView {
         gameManager.setTypeCellInMatrix(row, col, -1);
     }
 
-    public void gameOver() {
-        gridLayout.setVisibility(View.INVISIBLE);
-        gameManager.gameOver();
+    private void vibrateAndToast() {
+            Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+            if (vibrator != null) {
+                vibrator.vibrate(100);
+                toastMessageCrash();
+            }
+
+    }
+
+    @SuppressLint("DefaultLocale")
+    private void toastMessageCrash() {
+        game_TXT_toast.setVisibility(View.VISIBLE);
+        game_TXT_toast.setText(String.format("Ouch! You lost a life! you have left %d lives", gameManager.getHealth()));
+
+        // Create a new Handler
+        Handler handler = new Handler(context.getMainLooper());
+
+        // Post a delayed task to hide the TextView after 3 seconds (3000 milliseconds)
+        handler.postDelayed(() -> game_TXT_toast.setVisibility(View.INVISIBLE), 3000);
     }
 
     public void initMatrix() {
@@ -146,4 +171,35 @@ public class GameView {
     public ViewGroup getGridLayout() {
         return gridLayout;
     }
+
+    public void resetGame() {
+        // Reset all hearts to be visible
+        for (ShapeableImageView heart : game_IMG_hearts) {
+            heart.setVisibility(View.VISIBLE);
+        }
+
+        // Reset the score display
+        game_TXT_score.setText("0");
+
+        // Hide all the views in the grid layout
+        for (int i = 0; i < gameManager.getRowSize(); i++) {
+            for (int j = 0; j < gameManager.getColSize(); j++) {
+                gridLayout.getChildAt(i * gameManager.getColSize() + j).setVisibility(View.INVISIBLE);
+                gameManager.setTypeCellInMatrix(i, j, -1);  // Clear the game matrix types
+            }
+        }
+
+        // Reinitialize game manager states
+        gameManager.resetHealth();
+        gameManager.resetScore();
+        gameManager.initMatrixType();
+        gameManager.initGame();
+
+        // Update the hero's visibility in the last row
+        updateHeroVisibility();
+
+        // Ensure the grid layout is visible
+        gridLayout.setVisibility(View.VISIBLE);
+    }
+
 }
