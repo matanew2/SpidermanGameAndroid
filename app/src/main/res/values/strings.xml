@@ -5,4 +5,10 @@
     <string name="left">left</string>
     <string name="right">right</string>
     <string name="nan">NaN</string>
+    <string name="spiderman_vs_villain">Spiderman vs. Villain</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="fast_mode">Fast Mode</string>
+    <string name="sensor_mode">Sensor Mode</string>
+    <string name="start_game">Start Game</string>
+    <string name="distance">000</string>
 </resources>

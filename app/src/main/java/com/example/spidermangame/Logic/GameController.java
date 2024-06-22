@@ -14,15 +14,17 @@ public class GameController {
     private final Timer timer;
     private int time = 0;
 
+    private final int initialeDelay = 1000;
+
     public GameController(GameManager gameManager, GameView gameView) {
         this.gameManager = gameManager;
         this.gameView = gameView;
         this.timer = new Timer();
     }
 
-    public void startGame() {
+    public void startGame(int initialDelay) {
         // Initial delay
-        int initialDelay = 1000;
+//        int initialDelay = 1000;
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -49,6 +51,7 @@ public class GameController {
         gameView.detectAndHandleCollision();
         checkHealthHero();
         gameView.updateViewObjects();
+        gameView.countDistance();
     }
 
     private void checkHealthHero() {
@@ -69,4 +72,11 @@ public class GameController {
         timer.cancel();
     }
 
+    public void defineFastMode(boolean isFasterMode) {
+        if (isFasterMode) {
+            startGame(initialeDelay / 2);
+        } else {
+            startGame(initialeDelay);
+        }
+    }
 }

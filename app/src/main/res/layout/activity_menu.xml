@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+    android:gravity="center"
+    tools:context="com.example.spidermangame.MenuActivity">
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/header_LBL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
+        android:textAllCaps="true"
+        android:text="@string/spiderman_vs_villain"
+        android:textSize="60sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:textStyle="bold"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="10" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/menu_LBL_inputName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowDx="2.5"
+        android:shadowDy="1.5"
+        android:shadowRadius="1.5"
+        android:textAllCaps="true"
+        android:shadowColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/enter_your_name"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/menu_SW_faster"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:shadowDx="3.5"
+            android:shadowDy="2.5"
+            android:shadowRadius="5"
+            android:shadowColor="@color/black"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="@string/fast_mode"
+            android:background="@color/design_default_color_error"
+            android:textColor="@color/white"
+            android:textSize="25sp"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/menu_SW_sensor"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:shadowDx="3.5"
+            android:shadowDy="2.5"
+            android:shadowRadius="5"
+            android:shadowColor="@color/black"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="@string/sensor_mode"
+            android:background="@color/design_default_color_error"
+            android:padding="@dimen/cardview_default_elevation"
+            android:textColor="@color/white"
+            android:textSize="25sp"/>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/startGame_BTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:shadowDx="2.5"
+        android:shadowDy="1.5"
+        android:shadowRadius="1.5"
+        android:textAllCaps="true"
+        android:shadowColor="@color/black"
+        android:text="@string/start_game"
+        android:textSize="20sp"
+        android:backgroundTint="@color/design_default_color_error"/>
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/menu_IMG_doraBoots"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        app:srcCompat="@drawable/ic_hero" />
+
+
+
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/top10_BTN"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:shadowDx="2.5"-->
+<!--        android:shadowDy="1.5"-->
+<!--        android:shadowRadius="1.5"-->
+<!--        android:textAllCaps="true"-->
+<!--        android:shadowColor="@color/black"-->
+<!--        android:text="Top 10"-->
+<!--        android:fontFamily="@font/nightfishing"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textColor="@color/light3_purple"-->
+<!--        android:backgroundTint="@color/white"/>-->
+
+</LinearLayout>

@@ -10,6 +10,8 @@ public class GameManager {
     private final Random random;
     private final int[][] mainTypeMatrix;
     private int currentIndexHero;
+
+    private int distacne;
     private static final int SCORE_INCREMENT_MIN = 10;
     private static final int SCORE_INCREMENT_MAX = 59; // Adjusted for better range
     private static final int VILLAIN_THRESHOLD = 6;
@@ -21,6 +23,7 @@ public class GameManager {
         this.health = health;
         this.currentIndexHero = colSize / 2;
         this.score = 0;
+        this.distacne = 0;
         this.random = new Random();
         this.mainTypeMatrix = new int[rowSize][colSize];
         initMatrixType();
@@ -55,6 +58,14 @@ public class GameManager {
     public void addScore() {
         score += random.nextInt(SCORE_INCREMENT_MAX - SCORE_INCREMENT_MIN + 1) + SCORE_INCREMENT_MIN;
     }
+
+     public void countDistance() {
+        distacne++;
+     }
+
+     public int getDistacne() {
+        return distacne;
+     }
 
     public void setTypeCellInMatrix(int row, int col, int type) {
         mainTypeMatrix[row][col] = type;

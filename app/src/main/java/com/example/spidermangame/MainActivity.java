@@ -2,6 +2,7 @@ package com.example.spidermangame;
 
 import android.os.Bundle;
 import android.widget.GridLayout;
+import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,14 +20,17 @@ public class MainActivity extends AppCompatActivity {
     private GridLayout game_LAYOUT_matrix;
     private MaterialTextView game_TXT_score;
 
-    private MaterialTextView game_TXT_toast;
+    private  MaterialTextView main_TXT_distance;
     private ExtendedFloatingActionButton[] game_BTN_arrows; // init listeners
     private GameManager gameManager;
     private GameView gameView;
     private GameController gameController;
 
+    private boolean isFasterMode;
+
     private static final int INITIAL_HEALTH = 3;
-    private static final int GRID_SIZE = 3;
+    private static final int GRID_SIZE = 5;
+    public static final String KEY_SENSOR = "KEY_SENSOR", KEY_DELAY = "KEY_DELAY", KEY_NAME = "KEY_NAME", KEY_LON = "KEY_LON", KEY_LAT = "KEY_LAT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +39,25 @@ public class MainActivity extends AppCompatActivity {
         initializeGameComponents();
         initViews();
         initListeners();
+        extractIntentData();
+    }
+
+    private void extractIntentData() {
+        Intent previousIntent = getIntent();
+        this.isFasterMode = previousIntent.getBooleanExtra(KEY_DELAY, false);
     }
 
     private void initializeGameComponents() {
         findViewObjects();
         gameManager = new GameManager(INITIAL_HEALTH, GRID_SIZE);
-        gameView = new GameView(this, game_IMG_hearts, game_LAYOUT_matrix, game_TXT_score, gameManager);
+        gameView = new GameView(this, game_IMG_hearts, game_LAYOUT_matrix, game_TXT_score, gameManager, main_TXT_distance);
         gameController = new GameController(gameManager, gameView);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        gameController.startGame();
+        gameController.defineFastMode(isFasterMode);
     }
 
     @Override
@@ -85,6 +95,11 @@ public class MainActivity extends AppCompatActivity {
         findHearts();
         findGrid();
         findArrowsBar();
+        findDistance();
+    }
+
+    private void findDistance() {
+        this.main_TXT_distance = findViewById(R.id.main_TXT_distance);
     }
 
     private void findGrid() {

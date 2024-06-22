@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import com.example.spidermangame.Audio.SoundManager;
 import com.example.spidermanvsvenomgame.R;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
@@ -19,17 +21,27 @@ import com.google.android.material.textview.MaterialTextView;
 public class GameView {
     private final ShapeableImageView[] game_IMG_hearts;
     private final MaterialTextView game_TXT_score;
-
+    private final MaterialTextView main_TXT_distance;
+    private final SoundManager soundManager;
     private final GridLayout gridLayout;
     private final GameManager gameManager;
     private final Context context;
 
-    public GameView(Context context, ShapeableImageView[] game_IMG_hearts, GridLayout game_LAYOUT_matrix, MaterialTextView game_TXT_score, GameManager gameManager) {
+    public GameView(Context context, ShapeableImageView[] game_IMG_hearts, GridLayout game_LAYOUT_matrix, MaterialTextView game_TXT_score,
+                    GameManager gameManager, MaterialTextView main_TXT_distance){
         this.gameManager = gameManager;
         this.game_IMG_hearts = game_IMG_hearts;
         this.game_TXT_score = game_TXT_score;
         this.gridLayout = game_LAYOUT_matrix;
         this.context = context;
+        this.soundManager = new SoundManager(context);
+        this.main_TXT_distance = main_TXT_distance;
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void countDistance() {
+        this.gameManager.countDistance();
+        this.main_TXT_distance.setText(gameManager.getDistacne() + "m");
     }
 
     public void showHearts() {
@@ -110,6 +122,7 @@ public class GameView {
         int mainType = gameManager.getTypeCellInMatrix(row, col);
         switch (mainType) {
             case 0: // Villain
+                soundManager.playCrashSound();
                 gameManager.decreaseHealth();
                 game_IMG_hearts[gameManager.getHealth()].setVisibility(View.INVISIBLE);
                 // Show the toast message and vibrate the device
@@ -117,12 +130,14 @@ public class GameView {
 
                 break;
             case 1: // Heart
+                soundManager.playCollectCoinSound();
                 if (gameManager.getHealth() < game_IMG_hearts.length) {
                     gameManager.increaseHealth();
                     game_IMG_hearts[gameManager.getHealth() - 1].setVisibility(View.VISIBLE);
                 }
                 break;
             case 2: // Bullet (web score)
+                soundManager.playCollectCoinSound();
                 gameManager.addScore();
                 game_TXT_score.setText(String.valueOf(gameManager.getScore()));
                 break;
