@@ -99,6 +99,7 @@
 
 <!--        navigation bar-->
         <RelativeLayout
+            android:id="@+id/main_BTN_bar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">

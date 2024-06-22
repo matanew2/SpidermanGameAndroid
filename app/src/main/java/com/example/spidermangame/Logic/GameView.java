@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.example.spidermangame.Audio.SoundManager;
+import com.example.spidermangame.Sensor.CallBackSensorView;
 import com.example.spidermanvsvenomgame.R;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
@@ -38,6 +39,10 @@ public class GameView {
         this.main_TXT_distance = main_TXT_distance;
     }
 
+    public SoundManager getSoundManager() {
+        return soundManager;
+    }
+
     @SuppressLint("SetTextI18n")
     public void countDistance() {
         this.gameManager.countDistance();
@@ -50,6 +55,14 @@ public class GameView {
         }
     }
 
+    public final CallBackSensorView callBackSensorView = new CallBackSensorView() {
+        @Override
+        public void moveHeroBySensor(int index) {
+            gridLayout.getChildAt(gameManager.getCurrentIndexHero()).setVisibility(View.INVISIBLE);
+            gameManager.moveHero(index);
+            gridLayout.getChildAt(gameManager.getCurrentIndexHero()).setVisibility(View.VISIBLE);
+        }
+    };
     public void updateHeroVisibility() {
         int lastIndex = gameManager.getRowSize() - 1;
         for (int i = 0; i < gameManager.getColSize(); i++) {
@@ -177,7 +190,6 @@ public class GameView {
         toast.setGravity(Gravity.CENTER, 0, 0);  // Adjust the gravity and offset as needed
         return toast;
     }
-
 
     public void initMatrix() {
         gridLayout.setColumnCount( gameManager.getColSize());
