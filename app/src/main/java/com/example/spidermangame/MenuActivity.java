@@ -22,14 +22,11 @@ public class MenuActivity extends AppCompatActivity {
     private SwitchMaterial menu_SW_faster;
     private SwitchMaterial menu_SW_sensor;
     private SoundManager soundManager;
-
     private boolean isSensorOn = false;
     private boolean isFasterOn = false;
 
-    private double lat = 0.0;
-    private double lon = 0.0;
-
-
+    private final double lat = 0.0;
+    private final double lon = 0.0;
 
     @SuppressLint("MissingInflatedId")
     @Override
